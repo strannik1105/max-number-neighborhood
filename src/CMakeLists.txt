@@ -4,7 +4,13 @@ project(max-number-neighborhood LANGUAGES C)
 
 set(SOURCES 
     main.c 
-    common/alloc.h
+    common/list.c
 )
 
+
 add_executable(max-number-neighborhood ${SOURCES})
+
+target_include_directories(max-number-neighborhood
+    PRIVATE 
+        ${PROJECT_SOURCE_DIR}/include
+)

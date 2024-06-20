@@ -5,6 +5,7 @@ project(max-number-neighborhood LANGUAGES C)
 set(SOURCES 
     main.c 
     common/list.c
+    common/cmd.c
 )
 
 

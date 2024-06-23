@@ -1,7 +1,7 @@
 #ifndef CMD_H
 #define CMD_H
 
-#include "list.h"
+#include "utils.h"
 
 
 enum ParseStatus
@@ -16,7 +16,7 @@ typedef struct
 {
     int diff;
     int count;
-    List* arr;
+    IIterable* arr;
 } CMDParseResult;
 
 
@@ -24,5 +24,7 @@ typedef struct
 CMDParseResult* parse_cmd(const int argc, const char *argv[]);
 // print error message and stop program if status not SUCCESS
 void raise_from_result(CMDParseResult* result);
+
+void remove_parse_result(CMDParseResult* ptr);
 
 #endif

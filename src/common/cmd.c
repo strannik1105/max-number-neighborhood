@@ -1,23 +1,23 @@
 #include <stdlib.h>
 
-#include "alloc.h"
+#include "utils.h"
 #include "cmd.h"
 #include "list.h"
 
 
 static CMDParseResult* make_cmd_parse_result(enum ParseStatus status, int diff, int count, List* arr)
 {
-    CMDParseResult* parse_result = malloc(sizeof(CMDParseResult));
+    CMDParseResult* parse_result = ALLOC(CMDParseResult);
     parse_result->diff = diff;
     parse_result->count = count;
-    parse_result->arr = arr;
+    parse_result->arr = (IIterable*)arr;
     return parse_result;
 }
 
 CMDParseResult* parse_cmd(const int argc, const char *argv[])
 {
     enum ParseStatus status = CMD_SUCCESS;
-    List* arr = ALLOC(List);
+    List* arr = make_list();
     int k;
     int n;
 
@@ -50,4 +50,10 @@ CMDParseResult* parse_cmd(const int argc, const char *argv[])
     }
     
     return make_cmd_parse_result(status, k, n, arr);
+}
+
+void remove_parse_result(CMDParseResult* ptr)
+{
+    free(ptr->arr);
+    free(ptr);
 }

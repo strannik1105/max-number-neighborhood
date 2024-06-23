@@ -1,6 +1,7 @@
 #include <stdlib.h>
 
-#include "alloc.h"
+#include "utils.h"
+
 
 struct Node
 {
@@ -11,6 +12,8 @@ struct Node
 
 struct List
 {
+    IIterable it;
+
     struct Node* root;
 };
 
@@ -27,13 +30,6 @@ static struct Node* _make_node(void* data, struct Node* prev)
     node->prev = prev;
 
     return node;
-}
-
-struct List* make_list()
-{
-    struct List* lst = ALLOC(struct List);
-    lst->root = NULL;
-    return lst;
 }
 
 void list_append(struct List* lst, void* item)
@@ -65,6 +61,20 @@ void* list_pop(struct List* lst)
     free(old_root);
 
     return data;
+}
+
+static void* _iter_get_next(IIterable* iter)
+{
+    return list_pop((struct List*)iter);
+}
+
+struct List* make_list()
+{
+    struct List* lst = ALLOC(struct List);
+    lst->it._next_getter = _iter_get_next;
+    lst->root = NULL;
+
+    return lst;
 }
 
 static void _delete_list(struct Node* cur)

@@ -1,11 +1,16 @@
 #ifndef LIST_H
 #define LIST_H
 
+#include "utils.h"
+
+
 // it's must names Stack but.....
-typedef struct List {} List;
+typedef struct List {
+    IIterable it;
+} List;
 
 // create List object
-void make_list();
+List* make_list();
 
 // append new value into List
 void list_append(List* lst, void* item);

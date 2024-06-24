@@ -54,6 +54,6 @@ CMDParseResult* parse_cmd(const int argc, const char *argv[])
 
 void remove_parse_result(CMDParseResult* ptr)
 {
-    free(ptr->arr);
+    REMOVE_ITERABLE(ptr->arr);
     free(ptr);
 }

@@ -14,9 +14,13 @@ int main(const int argc, const char *argv[])
 
   foreach_T(float, iter, values)
   {
-    //if(iter)
+    if(*iter > *max)
+    {
+      max = iter;
+    }
   }
   
+  printf("MAX: %f\n", *max);
   remove_parse_result(parse_result);
   return 0;
 }

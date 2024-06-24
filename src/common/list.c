@@ -84,15 +84,6 @@ static void* _iter_get_next(IIterable* iter)
     }
 }
 
-struct List* make_list()
-{
-    struct List* lst = ALLOC(struct List);
-    lst->it._next_getter = _iter_get_next;
-    lst->root = NULL;
-
-    return lst;
-}
-
 static void _delete_list(struct Node* cur)
 {
     if(cur->prev != NULL)
@@ -112,4 +103,14 @@ void delete_list(struct List* lst)
     }
     
     free(lst);
+}
+
+struct List* make_list()
+{
+    struct List* lst = ALLOC(struct List);
+    lst->it.remove_instance = delete_list;
+    lst->it._next_getter = _iter_get_next;
+    lst->root = NULL;
+
+    return lst;
 }

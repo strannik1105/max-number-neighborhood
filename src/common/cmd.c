@@ -1,8 +1,8 @@
 #include <stdlib.h>
 
-#include "utils.h"
-#include "cmd.h"
-#include "list.h"
+#include "common/utils.h"
+#include "common/cmd.h"
+#include "common/list.h"
 
 
 static CMDParseResult* make_cmd_parse_result(enum ParseStatus status, int diff, int count, List* arr)

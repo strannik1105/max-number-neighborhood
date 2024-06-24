@@ -23,9 +23,11 @@ typedef struct IIterable
     void* cur;
 } IIterable;
 
+#define NEXT(T, iterable) (T*)iterable->_next_getter(iterable)
+
 // foreach implementation for Iterable
 #define foreach_T(T, iter, iterable) \
-    for(T* iter = iterable->_next_getter(iterable); iter != NULL; iter = (T*)iterable->_next_getter(iterable))
+    for(T* iter = NEXT(T, iterable); iter != NULL; iter = NEXT(T, iterable))
 
 #define foreach(iter, iterable) foreach_T(void, iter, iterable)
 

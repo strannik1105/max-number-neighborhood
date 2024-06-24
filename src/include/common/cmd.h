@@ -1,7 +1,7 @@
 #ifndef CMD_H
 #define CMD_H
 
-#include "utils.h"
+#include "common/utils.h"
 
 
 enum ParseStatus

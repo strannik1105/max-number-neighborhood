@@ -105,10 +105,15 @@ void delete_list(struct List* lst)
     free(lst);
 }
 
+static void _delete_iterable(IIterable* it)
+{
+    delete_list((struct List*)it);
+}
+
 struct List* make_list()
 {
     struct List* lst = ALLOC(struct List);
-    lst->it.remove_instance = delete_list;
+    lst->it.remove_instance = _delete_iterable;
     lst->it._next_getter = _iter_get_next;
     lst->root = NULL;
 

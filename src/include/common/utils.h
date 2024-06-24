@@ -19,16 +19,18 @@ static void* _alloc(const size_t size)
 typedef struct IIterable
 {
     // must return values consistently
-    void* (* remove_instance)(struct IIterable* it);
+    void (* remove_instance)(struct IIterable* it);
     void* (* _next_getter)(struct IIterable* it);
     void* cur;
 } IIterable;
 
 #define REMOVE_ITERABLE(iterable) iterable->remove_instance(iterable)
 #define NEXT(T, iterable) (T*)iterable->_next_getter(iterable)
+#define RESET(iterable) iterable->cur = NULL
 
 // foreach implementation for Iterable
 #define foreach_T(T, iter, iterable) \
+    RESET(iterable); \
     for(T* iter = NEXT(T, iterable); iter != NULL; iter = NEXT(T, iterable))
 
 #define foreach(iter, iterable) foreach_T(void, iter, iterable)

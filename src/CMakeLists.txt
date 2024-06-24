@@ -4,6 +4,7 @@ project(max-number-neighborhood LANGUAGES C)
 
 set(SOURCES 
     main.c 
+    blogic/max_searcher.c
     common/list.c
     common/cmd.c
 )

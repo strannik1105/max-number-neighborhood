@@ -20,6 +20,7 @@ typedef struct IIterable
 {
     // must return values consistently
     void* (* _next_getter)(struct IIterable* it);
+    void* cur;
 } IIterable;
 
 // foreach implementation for Iterable

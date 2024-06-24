@@ -65,7 +65,23 @@ void* list_pop(struct List* lst)
 
 static void* _iter_get_next(IIterable* iter)
 {
-    return list_pop((struct List*)iter);
+    if(iter->cur == NULL)
+    {
+        iter->cur = ((struct List*)iter)->root;
+    }
+    else
+    {
+        iter->cur = ((struct Node*)iter->cur)->prev;
+    }
+
+    if(iter->cur != NULL)
+    {
+        return ((struct Node*)iter->cur)->data;
+    }
+    else
+    {
+        return NULL;
+    }
 }
 
 struct List* make_list()

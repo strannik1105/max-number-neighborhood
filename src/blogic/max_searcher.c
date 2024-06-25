@@ -3,15 +3,15 @@
 
 float search_max(IIterable* values)
 {
-    float* max;
+    float max;
 
     foreach_T(float, iter, values)
     {
-        if(*iter > *max)
+        if(*iter > max)
         {
-        max = iter;
+            max = *iter;
         }
     }
 
-    return *max;
+    return max;
 }

@@ -7,20 +7,27 @@
 
 int main(const int argc, const char *argv[])
 {
-    CMDParseResult* parse_result = parse_cmd(argc, argv);
-    // get cmd args
-    IIterable* values = parse_result->arr;
-    float diff = parse_result->diff;
+  CMDParseResult* parse_result = parse_cmd(argc, argv);
+  
+  if(parse_result->status != CMD_SUCCESS)
+  {
+    print_err_msg(parse_result);
+    return -1;
+  }
 
-    // search max
-    float max = search_max(values);
-    // search number neigbours
-    IIterable* indexes = find_neighborhood(values, diff, max);  
+  // get cmd args
+  IIterable* values = parse_result->arr;
+  float diff = parse_result->diff;
 
-    // print results
-    print_results(max, indexes);
+  // search max
+  float max = search_max(values);
+  // search number neigbours
+  IIterable* indexes = find_neighborhood(values, diff, max);  
 
-    REMOVE_ITERABLE(indexes);
-    remove_parse_result(parse_result);
-    return 0;
+  // print results
+  print_results(max, indexes);
+
+  REMOVE_ITERABLE(indexes);
+  remove_parse_result(parse_result);
+  return 0;
 }

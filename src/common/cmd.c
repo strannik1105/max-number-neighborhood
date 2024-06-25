@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdlib.h>
 
 #include "common/utils.h"
@@ -8,9 +9,12 @@
 static CMDParseResult* make_cmd_parse_result(enum ParseStatus status, int diff, int count, List* arr)
 {
     CMDParseResult* parse_result = ALLOC(CMDParseResult);
+
+    parse_result->status = status;
     parse_result->diff = diff;
     parse_result->count = count;
     parse_result->arr = (IIterable*)arr;
+
     return parse_result;
 }
 
@@ -50,6 +54,19 @@ CMDParseResult* parse_cmd(const int argc, const char *argv[])
     }
     
     return make_cmd_parse_result(status, k, n, arr);
+}
+
+void print_err_msg(CMDParseResult* result)
+{
+    switch (result->status)
+    {
+    case CMD_INCORRECT_ARGS:
+        printf("Incorrect args provided\n");
+    case CMD_TOO_FEW_ARGS:
+        printf("Too few args provided\n");
+    case CMD_TOO_MANY_ARGS:
+        printf("Too many args provided\n");
+    }
 }
 
 void remove_parse_result(CMDParseResult* ptr)

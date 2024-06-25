@@ -14,6 +14,7 @@ enum ParseStatus
 
 typedef struct
 {
+    enum ParseStatus status;
     int diff;
     int count;
     IIterable* arr;
@@ -22,8 +23,8 @@ typedef struct
 
 //parse command line args
 CMDParseResult* parse_cmd(const int argc, const char *argv[]);
-// print error message and stop program if status not SUCCESS
-void raise_from_result(CMDParseResult* result);
+// print error message
+void print_err_msg(CMDParseResult* result);
 
 void remove_parse_result(CMDParseResult* ptr);
 

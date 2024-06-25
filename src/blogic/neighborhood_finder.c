@@ -15,7 +15,7 @@ static bool is_neighbour(const float value1, const float value2, const float dif
   return false;
 }
 
-IIterable* find_neighborhood(IIterable* values, float diff, float max)
+IIterable* find_neighborhood(IIterable* values, const float diff, const float max)
 {
     List* indexes = make_list();
     int index = 0;

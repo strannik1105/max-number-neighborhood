@@ -4,6 +4,6 @@
 #include "common/utils.h"
 
 
-IIterable* find_neighborhood(IIterable* values, float diff, float max);
+IIterable* find_neighborhood(IIterable* values, const float diff, const float max);
 
 #endif

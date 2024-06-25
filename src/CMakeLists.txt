@@ -6,6 +6,7 @@ set(SOURCES
     main.c 
     blogic/max_searcher.c
     blogic/neighborhood_finder.c
+    blogic/repr.c
     common/list.c
     common/cmd.c
 )
